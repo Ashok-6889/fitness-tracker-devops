@@ -17,8 +17,6 @@ pipeline {
         stage('Build') {
             steps {
                 dir('backend/auth-service') {
-                    sh 'pwd'
-                    sh 'ls -l'
                     sh 'mvn clean package'
                 }
             }
@@ -32,9 +30,15 @@ pipeline {
             }
         }
 
+        stage('Remove Old Container') {
+            steps {
+                sh 'docker rm -f auth-container || true'
+            }
+        }
+
         stage('Docker Run') {
             steps {
-                sh 'docker run -d -p 8080:8080 auth-service'
+                sh 'docker run -d -p 8081:8080 --name auth-container auth-service'
             }
         }
     }
