@@ -32,13 +32,13 @@ pipeline {
 
         stage('Docker Tag') {
             steps {
-                sh 'docker tag auth-service your-dockerhub-username/auth-service:latest'
+                sh 'docker tag auth-service ashok6889/auth-service:latest'
             }
         }
 
         stage('Docker Push') {
             steps {
-                sh 'docker push your-dockerhub-username/auth-service:latest'
+                sh 'docker push ashok6889/auth-service:latest'
             }
         }
 
