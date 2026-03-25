@@ -8,9 +8,9 @@ pipeline {
 
     stages {
 
-        stage('Clone') {
+        stage('Checkout Code') {
             steps {
-                git 'https://github.com/Ashok-6889/fitness-tracker-devops.git'
+                git branch: 'main', url: 'https://github.com/Ashok-6889/fitness-tracker-devops.git'
             }
         }
 
