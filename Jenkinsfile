@@ -30,6 +30,18 @@ pipeline {
             }
         }
 
+        stage('Docker Tag') {
+            steps {
+                sh 'docker tag auth-service your-dockerhub-username/auth-service:latest'
+            }
+        }
+
+        stage('Docker Push') {
+            steps {
+                sh 'docker push your-dockerhub-username/auth-service:latest'
+            }
+        }
+
         stage('Remove Old Container') {
             steps {
                 sh 'docker rm -f auth-container || true'
