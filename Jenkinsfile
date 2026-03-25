@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     tools {
-        maven 'maven'
         jdk 'jdk17'
+        maven 'maven'
     }
 
     stages {
@@ -16,19 +16,25 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean install'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo 'Running tests...'
+                dir('backend/auth-service') {
+                    sh 'pwd'
+                    sh 'ls -l'
+                    sh 'mvn clean package'
+                }
             }
         }
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -t fitness-app .'
+                dir('backend/auth-service') {
+                    sh 'docker build -t auth-service .'
+                }
+            }
+        }
+
+        stage('Docker Run') {
+            steps {
+                sh 'docker run -d -p 8080:8080 auth-service'
             }
         }
     }
