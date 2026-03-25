@@ -10,7 +10,7 @@ pipeline {
 
         stage('Clone') {
             steps {
-                git 'git@github.com:Ashok-6889/fitness-tracker-devops.git'
+                git 'https://github.com/Ashok-6889/fitness-tracker-devops.git'
             }
         }
 
